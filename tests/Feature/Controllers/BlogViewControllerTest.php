@@ -27,7 +27,8 @@ class BlogViewControllerTest extends TestCase
              ->assertSee($blog3->title)
              ->assertSee($blog1->user->name)
              ->assertSee($blog2->user->name)
-             ->assertSee($blog3->user->name);
+             ->assertSee($blog3->user->name)
+             ->assertSeeInOrder([$blog2->title, $blog3->title, $blog1->title]);
     }
 
     /** @test */
