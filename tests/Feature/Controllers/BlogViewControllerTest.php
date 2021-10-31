@@ -31,6 +31,23 @@ class BlogViewControllerTest extends TestCase
              ->assertSeeInOrder([$blog2->title, $blog3->title, $blog1->title]);
     }
 
+    /** @test index */
+    function ブログの一覧、非公開のブログは表示されない()
+    { 
+        Blog::factory()->create([
+            'status' => Blog::CLOSED,
+            'title' => 'ブログA',
+        ]);
+        Blog::factory()->create(['title' => 'ブログB']);
+        Blog::factory()->create(['title' => 'ブログC']);
+
+        $this->get('/')
+             ->assertOK()
+             ->assertDontSee('ブログA')
+             ->assertSee('ブログB')
+             ->assertSee('ブログC');
+    }
+
     /** @test */
     function factoryの観察()
     {
