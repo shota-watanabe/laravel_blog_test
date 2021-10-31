@@ -16,9 +16,9 @@ class BlogViewControllerTest extends TestCase
     function ブログのトップページを開ける()
     {
         // ブログを3件登録
-        $blog1 = Blog::factory()->create();
-        $blog2 = Blog::factory()->create();
-        $blog3 = Blog::factory()->create();
+        $blog1 = Blog::factory()->hasComments(1)->create();
+        $blog2 = Blog::factory()->hasComments(3)->create();
+        $blog3 = Blog::factory()->hasComments(2)->create();
 
         $this->get('/')
              ->assertOK()
