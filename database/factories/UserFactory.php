@@ -44,4 +44,13 @@ class UserFactory extends Factory
             ];
         });
     }
+
+    public function validData($ovverrides = [])
+    {   
+        return array_merge([
+            'name' => '太郎',
+            'email' => 'aaa@bbb.net',
+            'password' => 'abcd1234',
+        ]);
+    }
 }

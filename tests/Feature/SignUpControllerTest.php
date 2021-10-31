@@ -21,20 +21,25 @@ class SignUpControllerTest extends TestCase
              ->assertOK();
     }
 
+    private function validData($ovverrides = [])
+    {   
+        return array_merge([
+            'name' => '太郎',
+            'email' => 'aaa@bbb.net',
+            'password' => 'abcd1234',
+        ]);
+    }
+
     /** @test store */
     function ユーザー登録できる()
     {
         // データ検証
         // DBに保存
         // ログインさせてからマイページにリダイレクト
-        $this->withoutExceptionHandling();
-
-        $validData = [
-            'name' => '太郎',
-            'email' => 'aaa@bbb.net',
-            'password' => 'abcd1234',
-        ];
-
+        // $this->withoutExceptionHandling();
+        $validData = User::factory()->validData();
+        dd($validData);
+        
         $this->post('signup', $validData)
             ->assertOk();
 
